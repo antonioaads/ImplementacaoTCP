@@ -13,16 +13,16 @@ Deverá ser implementada a probabilidade de uma colisão, ou seja, a cada envio 
 A camada física deverá funcionar
 
 **Algoritmo:**
-*Remetente:* verifica se há colisão (probabilidade). Se sim, aguarda tempo aleatório, senão envia.
-*Remetente:* envia quadro (fragmentação, se necessária, será realizada posteriormente pela camada de rede)
-*Destinatário:* recebe quadro, remove cabeçalho e encaminha payload para a camada superior
+1. *Remetente:* verifica se há colisão (probabilidade). Se sim, aguarda tempo aleatório, senão envia.
+2. *Remetente:* envia quadro (fragmentação, se necessária, será realizada posteriormente pela camada de rede)
+3. *Destinatário:* recebe quadro, remove cabeçalho e encaminha payload para a camada superior
 
 *Formato da PDU original:*
 
-6 bytes       - MAC Destino         - 41:7f:33:0e:65:b2
-6 bytes       - MAC Origem          - 41:7f:83:e8:5e:ff
-2 bytes       - Tamanho do payload  - 8
-0-1500 bytes  - Payload             - sandrord
+* 6 bytes       - MAC Destino         - 41:7f:33:0e:65:b2
+* 6 bytes       - MAC Origem          - 41:7f:83:e8:5e:ff
+* 2 bytes       - Tamanho do payload  - 8
+* 0-1500 bytes  - Payload             - sandrord
 
 *Formato da PDU em bits:*
 01000001011111110011001100001110011001011011001000000000000010000111001101100001011011100110010001110010011011110111001001100100
