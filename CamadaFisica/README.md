@@ -1,68 +1,35 @@
-# Trabalho Pratico - Enviar arquivo de um PC para outro
+# Implementar a camada Física da pilha TCP
 
-O objetivo dessa trabalho consiste em basicamente enviar um arquivo de texto de um computador para outro. Para tal,
-foi utilizado a linguagem ShellScript, devido a um sorteio feito em sala de aula.
+O objetivo dessa parte do trabalho, é implementar a camada física da pilha TCP respeitando as diretrizes estabelecidas no enunciado do trabalho, conforme cópia no final desse README:
 
-Para isso, desenvolveu-se dois códigos, um que irá rodar na máquina onde o arquivo está, ou seja, na máquina que enviará o arquivo
-e outro que irá rodar na máquina que receberá o arquivo, chamados carinhosamente de enviador e recebedor, respectivamente.
+## Enunciado
 
-A base do funcionamento do trabalho executado é o *NetCat*, que trata-se de uma ferramenta de rede disponível para
-os principais sistemas operacionais, porém, como utilizamos linux, o que irá nos interessar é o *NetCat* para linux.
+Deverá ser usado o TCP em sua implementação com um código cliente-servidor para fazer a transferência entre os dois hosts. O Quadro Ethernet a ser enviado deverá estar dentro de um arquivo txt, cujo conteúdo serão os bits que o formam seguindo a definição a seguir, baseada na RFC (https://tools.ietf.org/html/rfc895). 
 
-## Arquivo a ser enviado
+Neste caso teremos duas PDUs a serem apresentadas por esta camada, a PDU original, proveniente dos dados da camada superior e a PDU convertida para bits, a qual deverá ser entregue ao host de destino. Camada física recebe da camada superior a mensagem a ser trocada e o endereço (IP) do destinatário. Assim, deverá descobrir o MAC Address para preencher o quadro com esta informação, para isso, fará uso do protocolo ARP (ou comando ARP na linha de comando). 
 
-Foi gerado um arquivo para o envio, chamado *arquivoParaEnvio.txt* que foi gerado através de um *lorem Ipsum*, conforme pode ser visto na imagem abaixo:
+Deverá ser implementada a probabilidade de uma colisão, ou seja, a cada envio de PDU de um lado para outro, deverá ser gerado um número aleatório que, se dentro de uma faixa de valores, considera-se que houve colisão para se esperar um tempo aleatório e depois reenviar o quadro.
 
-![Arquivo a ser enviado](./imagens/arquivoEnvio.png)
+A camada física deverá funcionar
 
-## Recebedor
+**Algoritmo:**
+*Remetente:* verifica se há colisão (probabilidade). Se sim, aguarda tempo aleatório, senão envia.
+*Remetente:* envia quadro (fragmentação, se necessária, será realizada posteriormente pela camada de rede)
+*Destinatário:* recebe quadro, remove cabeçalho e encaminha payload para a camada superior
 
-O código do recebedor é muito simples, através do *NetCat*, ele abre e mantêm "escutando" uma determinada porta do computador, para quando algum arquivo for enviado para essa porta, ele consiga recebê-lo e salvá-lo no computador.
+*Formato da PDU original:*
 
-O código utilizado segue abaixo: (A explicação do código está nos próprios comentários)
-![Codigo do Recebedor](./imagens/codigoRecebedor.png)
+6 bytes       - MAC Destino         - 41:7f:33:0e:65:b2
+6 bytes       - MAC Origem          - 41:7f:83:e8:5e:ff
+2 bytes       - Tamanho do payload  - 8
+0-1500 bytes  - Payload             - sandrord
 
-Utilizei variáveis de ambiente no linux para determinar os dois fatores cruciais para o devido funcionamento do código, que é porta que
-irá ser escutada e o nome do arquivo que irá ser nomeado após recebimento. No exemplo da imagem, utilizamos a porta *7000* e o nome do arquivo que será recebido é *arquivoParaReceber.txt*.
+*Formato da PDU em bits:*
+01000001011111110011001100001110011001011011001000000000000010000111001101100001011011100110010001110010011011110111001001100100
 
-Ao executar o script, temos o seguinte resultado:
-![Executando Recebedor Inicio](./imagens/executandoRecebedorInicio.png)
-
-Enquanto nao rodarmos o *Enviador*, nada a mais irá ocorrer.
-
-## Enviador
-
-O código do enviador é tão simples quanto o do Recebedor. O que ele faz é acessar a porta que foi aberta, também através do *NetCat*, e enviar um arquivo que lhe for passado, no caso, o arquivo *arquivoParaEnvio.txt*, conforme já foi mencionado.
-
-O código utilizado segue abaixo: (A explicação do código está nos próprios comentários)
-![Codigo do Enviador](./imagens/codigoEnviador.png)
-
-Para este código, conforme pode ser visto acima, também utilizei variáveis de ambiente, mas, neste caso, três valores são cruciais, sendo eles o IP que ele deverá conectar, a porta que deverá acessar e o arquivo que ele deverá enviar. Lembrando de prestar atenção no caminho do arquivo. 
-
-Para saber o IP da máquina, basta rodar o comando *ifconfig* na máquina onde irá executar o *recebedor*, conforme imagem abaixo:(se analisar, o Ip de resposta do comando, é exatamente o mesmo que foi utilizado no código demonstrado)
-![IfConfig](./imagens/ifConfig.png)
-
-Nos testes, foi utilizado o mesmo diretório para tudo, conforme pode ser visto através do comando *ls* :
-![Área de trabalho enviador](./imagens/areaTrabalhoEnviador.png)
-
-Executando o enviador, temos o seguinte resultado no terminal:
-
-![Executando Enviador inicio](./imagens/executandoEnviadorInicio.png)
-
-Após essa mensagem, temos o *delay* de alguns milisegundos, e a seguinte mensagem aparece:
-![Executando Enviador](./imagens/executandoEnviador.png)
-
-Diante disso, temos o término do envio, e conseguentemente, temos uma resposta na tela do *Recebedor*, conforme abaixo: (Lembrando que para rodar o *Enviador*, o *Recebedor* já deverá estar sendo executado, conforme tópico anterior)
-![Executando Recebedor](./imagens/executandoRecebedor.png)
-
-## Resultado
-
-Após esses passos, o *NetCat* já se responsabiliza por fechar as portas que foram abertas, e a comunicação finaliza. 
-Enfim, temos o arquivo, com o nome que foi dado no *Recebedor*, no diretório onde ele foi executado, conforme abaixo:
-![Executando Recebedor](./imagens/areaTrabalhoRecebedor.png)
-
-Resta, agora, apenas confirmarmos se o arquivo recebido consiste com o arquivo enviado. Diante disso, segue abaixo o arquivo *arquivoParaReceber.txt*:
-![Arquivo Recebido](./imagens/arquivoRecebido.png)
-
-Se analisarmos o texto com o que foi mostrado em cima, pode-se comprovar que são idênticos.
+*Padrão de conversão:*
+Endereço MAC é separado por “:”, que é ignorado na conversão para binário
+Endreeço MAC é convertido de hexa para binário por grupos de 1 byte
+Valor em Tamanho do payload é convertido em campo de 2 bytes
+Payload é convertido de ascii para binário
 
