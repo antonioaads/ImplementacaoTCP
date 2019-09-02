@@ -2,7 +2,6 @@
 
 readonly PduRedeFisica=PduRedeFisica.txt    
 readonly PduFisica=PduFisica.txt
-readonly IpServidor=127.0.0.1
 readonly PortaServidor=7000
 readonly FileLog=cliente.log
 
@@ -48,15 +47,15 @@ payload=$(cat ${PduRedeFisica} | head -2 | tail -1);
 enviaLog "Ip destino é: ${ipDestino}"; 
 enviaLog "Mensagem de payload é: ${payload}";
 
-macOrigem=$(cat /sys/class/net/$(ip route show default | awk '/default/ {print $5}')/address)
+macOrigem=$(cat /sys/class/net/wlp2s0/$(ip route show default | awk '/default/ {print $5}')address)
 
 enviaLog "O MAC Address de origem é: ${macOrigem}"; 
 
-if [ "$IpServidor" == "localhost" ] || [ "$IpServidor" == "127.0.0.1" ]; then
+if [ "$ipDestino" == "localhost" ] || [ "$ipDestino" == "127.0.0.1" ]; then
     macDestino=$macOrigem;
     enviaLog "A comunicação está sendo feita na mesma máquina"
 else
-    macDestino=$(arp ${IpServidor} -a | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}')
+    macDestino=$(arp ${ipDestino} -a | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}')
 fi
 
 enviaLog "O MAC Address destino é: ${macDestino}"
@@ -89,6 +88,6 @@ done
 
 enviaLog "Enviando a pdu"
 
-nc $IpServidor $PortaServidor < $PduFisica
+nc $ipDestino $PortaServidor < $PduFisica
 
 enviaLog "PDU Enviada"	
