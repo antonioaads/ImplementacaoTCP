@@ -2,6 +2,24 @@
 
 O objetivo dessa parte do trabalho, é implementar a camada física da pilha TCP respeitando as diretrizes estabelecidas no enunciado do trabalho, conforme cópia no final desse README:
 
+## Escolhas de projeto
+
+A ideia dessa parte da documentação é exclarecer algumas lógicas que foram utilizadas devido a escolhas que o grupo adotou, conforme citado expecificamente abaixo:
+
+### Comunicação com a camada fisica
+
+Para a comunicação de alguma outra camada, com a camada física, utilizou-se um arquivo .txt. No exemplo, chamamos esse arquivo de PduRedeFisica.txt, para deixar claro que seria uma PDU que está sendo passada da camada de rede (ainda não implementada) para a camada física. 
+
+O formato desse arquivo é bem simples, sendo a primeira linha o IP de destino e a segunda linha o payload que deverá ser enviado.
+
+### Conversão de dados para binário
+
+Para manter uma melhor representação da mensagem no texto binário, atitude que simplifica e minimiza erros na hora de converter para *string* novamente, utilizou-se formas diferentes conforme o que queria-se enviar, sendo:
+
+#### MAC Address
+
+Para as conversões do MAC Address, utilizou-se uma função desenvolvida pelo grupo, que procura cada caracter hexadecimal e substitui por sua representação em 4 bits. 
+
 ## Enunciado
 
 Deverá ser usado o TCP em sua implementação com um código cliente-servidor para fazer a transferência entre os dois hosts. O Quadro Ethernet a ser enviado deverá estar dentro de um arquivo txt, cujo conteúdo serão os bits que o formam seguindo a definição a seguir, baseada na RFC (https://tools.ietf.org/html/rfc895). 
