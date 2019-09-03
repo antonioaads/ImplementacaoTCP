@@ -18,7 +18,9 @@ Para manter uma melhor representação da mensagem no texto binário, atitude qu
 
 #### MAC Address
 
-Para as conversões do MAC Address, utilizou-se uma função desenvolvida pelo grupo, que procura cada caracter hexadecimal e substitui por sua representação em 4 bits. 
+Para as conversões do MAC Address, utilizou-se uma função desenvolvida pelo grupo, que procura cada caracter hexadecimal e substitui por sua representação em 4 bits. Fez-se dessa forma para manter o padrão da PDU que será enviada, conforme definido no enunciado. 
+
+Não utilizou-se conversão pela calculadora ou de outras formas, pois precisávamos dessa precisão na quantidade de bits, para que a maquina de destino conseguisse traduzir essa mensagem de maneira correta.
 
 ## Enunciado
 
