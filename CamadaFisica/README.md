@@ -22,6 +22,26 @@ Para as conversões do MAC Address, utilizou-se uma função desenvolvida pelo g
 
 Não utilizou-se conversão pela calculadora ou de outras formas, pois precisávamos dessa precisão na quantidade de bits, para que a maquina de destino conseguisse traduzir essa mensagem de maneira correta.
 
+#### Tamanho do payload
+
+Para o tamanho do payload, também é necessário preocuparmos com a quantidade de bits, pois para essa informação, a PDU deverá ter exatamente 2 bytes, ou seja, 16 bits. Pelo mesmo motivo citado acima, não pode-se utilizar funções prontas disponíveis no SO, pois essas normalmente não fixam bits a esquerda, então, por exemplo, o inteiro na base 1 seria representado na base binaria também como 1, representação que por sua vez é errônea, pois, para o modelo de PDU utilizada, a representação correta seria 0000000000000001. 
+
+Para solucionar esse problema, convertemos o tamanho do payload da base decimal para a base hexadecimal, fixando 4 digitos para esse representação, através da função printf("%04x", tamanhoPayload), que transforma, 1(base 10) em 0001(base hexadecimal).
+
+#### Payload 
+
+Para converter o payload, utilizou-se um comando em *perl*, que de maneira simples e clara converte caracteres ASCII em byte.
+
+### Conversão de dados para hexadecimal e ASCII
+
+#### MAC ADDRESS e tamanho do payload
+
+Devido as peculiaridades adotadas anteriormente, temos um modelo binário muito bem definido, então, par voltar para qualquer outra representação, sendo ela decimal ou hexadecimal, foi só utilizar a função ("obase=BaseDestino; ibase=2; numeroParaConverter" | bc), substituindo onde esta BaseDestino para 10 (decimal) ou para 16 (hexadecimal).
+
+#### Payload
+
+Para o payload, utilizou a função inversa da utilizada na conversão, também em *perl*. Escolhemos por essa solução devido a facilidade e a clareza do código.
+
 ## Enunciado
 
 Deverá ser usado o TCP em sua implementação com um código cliente-servidor para fazer a transferência entre os dois hosts. O Quadro Ethernet a ser enviado deverá estar dentro de um arquivo txt, cujo conteúdo serão os bits que o formam seguindo a definição a seguir, baseada na RFC (https://tools.ietf.org/html/rfc895). 
