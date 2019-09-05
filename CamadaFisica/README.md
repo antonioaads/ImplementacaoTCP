@@ -42,6 +42,10 @@ Devido as peculiaridades adotadas anteriormente, temos um modelo binário muito 
 
 Para o payload, utilizou a função inversa da utilizada na conversão, também em *perl*. Escolhemos por essa solução devido a facilidade e a clareza do código.
 
+### Envio da PDU
+
+Para envio da PDU, utilizou-se a ferramenta disponível no linux, NetCat, conforme foi utilizado e detalhadamente explicado na tarefa anterior, que era apenas enviar um arquivo de um PC para outro. Caso tenha alguma dúvida quanto a essa parte, basta consulta o [link](https://github.com/antonioaads/CEFET-MG/tree/master/EngenhariaComputacao/6_Semestre/Redes/EnviarArquivoUsandoShellScript).
+
 ## Enunciado
 
 Deverá ser usado o TCP em sua implementação com um código cliente-servidor para fazer a transferência entre os dois hosts. O Quadro Ethernet a ser enviado deverá estar dentro de um arquivo txt, cujo conteúdo serão os bits que o formam seguindo a definição a seguir, baseada na RFC (https://tools.ietf.org/html/rfc895). 
