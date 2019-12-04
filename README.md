@@ -91,8 +91,9 @@ Depois basta executar transp_cliente para enviar requisições da camada de apli
 
 ex.: 
 
-python3 transp_cliente.py <porta_local> <porta_destino>
-python3 transp_server.py <porta_local>
+`python3 transp_cliente.py <porta_local> <porta_destino>`
+
+`python3 transp_server.py <porta_local>`
 
 ### UDP
 
@@ -105,8 +106,8 @@ Execute udp_cliente para enviar pacotes udp e udp_server para escutar pacotes ud
 
 ex.:
 
-python3 udp_cliente.py
-python3 udp_server.py
+`python3 udp_cliente.py`
+`python3 udp_server.py`
 
 # Camada de Rede
 O objetivo desta parte do trabalho diz respeito ao roteamento realizado pela camada de rede da pilha de protocolos TCP/IP.
