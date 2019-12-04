@@ -75,12 +75,12 @@ def listen():
             else:
                 if a.head.fin == True:
                     current_ack +=1
-                    b = tr.Segment(tr.Header(lcl_port, dst_port, current_ack, current_ack, start_window_size, ackn=True, fin=True))
+                    b = tr.Segment(tr.Header(lcl_port, dst_port, current_seq, current_ack, start_window_size, ackn=True, fin=True))
                     exit = True
                 else:
                     window[current_ack] = (len(a.data),a)
                     current_ack += len(a.data)
-                    b = tr.Segment(tr.Header(lcl_port, dst_port, current_ack, current_ack, start_window_size, ackn=True))
+                    b = tr.Segment(tr.Header(lcl_port, dst_port, current_seq, current_ack, start_window_size, ackn=True))
             tr.safe_send(send_location, b)
 
 #Após término da conexão, envia dados para a camada de aplicação

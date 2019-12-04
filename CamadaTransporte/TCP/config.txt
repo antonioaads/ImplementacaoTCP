@@ -1,6 +1,4 @@
-80
-12345
-AplClient/mensagem.txt
-AplServer/mensagem.txt
-TranspClient/Segment.txt
-TranspServer/Segment.txt
+AplicacaoTransporte/Requisicao_de_transporte.txt
+AplicacaoTransporte/Resposta_de_transporte.txt
+TransporteRede/Requisicao_de_rede.txt
+TransporteRede/Resposta_de_rede.txt
