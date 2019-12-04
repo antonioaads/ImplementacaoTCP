@@ -7,7 +7,7 @@ Prof. Sandro Renato Dias
 CEFET-MG / 2019-2
 <br>
 O Documento relata o processo de Implementação da Pilha de Comunicação entre as camada no modelo TCP.
-O trabalho foi diivdido em 4 camadas ,são elas: <br>
+O trabalho foi dividido em 4 camadas ,são elas: <br>
 <li>Camada de Aplicação : Desenvolvida pelo aluno Marcos Junio, utilizando a Linguagem Go.<br>
 <li>Camada de Transporte : Desenvolvida pelo aluno Gabriel , utilizando a Linguagem Python.<br>
 <li>Camada de Rede : Desenvolvida pelo aluno Rodrigo ,utilizando a linguagem JavaScript.<br>
