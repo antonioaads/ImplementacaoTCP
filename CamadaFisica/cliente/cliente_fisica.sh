@@ -41,8 +41,10 @@ hex2Bin(){
 
 enviaLog "Lendo a PDU"
 
-ipDestino=$(cat ${PduRedeFisica} | head -1 | tail -1);
-payload=$(cat ${PduRedeFisica} | head -2 | tail -1);
+ipOrigem=$(cat ${PduRedeFisica} | cut -d\| -f3 | head -1);
+ipDestino=$(cat ${PduRedeFisica} | cut -d\| -f4 | head -1);
+checkSun=$(cat ${PduRedeFisica} | cut -d\| -f5 | head -1);
+payload=$(cat ${PduRedeFisica} | cut -d\| -f13);
 
 enviaLog "Ip destino é: ${ipDestino}"; 
 enviaLog "Mensagem de payload é: ${payload}";
