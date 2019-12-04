@@ -1,0 +1,6 @@
+80
+12345
+AplClient/mensagem.txt
+AplServer/mensagem.txt
+TranspClient/Segment.txt
+TranspServer/Segment.txt

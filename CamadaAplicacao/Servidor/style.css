@@ -1,0 +1,436 @@
+body {
+    font-family: Roboto, sans-serif;
+    font-size: 100%;
+    color: white;
+    background-image: url(img/site-bg.png);
+    margin: 0;
+    padding: 0;
+    min-width: 20rem;
+
+}
+
+/* Consistent fonts. See http://stackoverflow.com/a/1497059. */
+input, button, .button, select, option, textarea {
+    font-family: Roboto, sans-serif;
+    font-size: 100%;
+    padding: 0.75rem;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.material-icons {
+    font-size: 100%;
+}
+
+/* Firefox places an ugly red border on the input if its input is invalid. */
+input:invalid {
+    box-shadow: none;
+}
+
+button, .button {
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+button:hover, .button:hover {
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+}
+
+a {
+    text-decoration: none;
+}
+
+/*
+ * Page structure.
+ */
+
+#slice1 .center1280 {
+    padding-top: 40px;
+}
+
+#slice2 {
+    background-color: #607D8B;
+    text-align: center;
+}
+
+#slice3a .center1280 {
+    padding: 1px 0;
+}
+
+#slice3a .center1280 + .center1280 {
+    background-color: rgba(0, 0, 0, .05);
+}
+
+#slice3b {
+    display: none;
+}
+
+#slice4 {
+    background-color: #607D8B;
+}
+
+#slice5 {
+    background-color: #333;
+}
+
+#slice5 .center1280 {
+    padding: 1rem 0;
+    width: 85%;
+}
+
+.center1280 {
+    margin: 0 auto;
+    max-width: 1280px;
+}
+
+/*
+ * First slice.
+ */
+
+#sign-in {
+    display: none;
+}
+
+#logo {
+    width: 15rem;
+    display: block;
+    margin: 0 auto;
+}
+
+#slice1 p {
+    margin: 2.5rem auto;
+    text-align: center;
+    font-size: 1.75rem;
+    width: 85%;
+    color: #607D8B;
+}
+
+#slice1 .osx-window, #slice1-image {
+    width: 85%;
+    margin: 0 auto;
+    display: block;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, .2);
+}
+
+/*
+ * Second slice.
+ */
+
+#slice2 .button {
+    margin: 0 auto;
+    padding-right: 2rem;
+    padding-left: 2rem;
+    display: inline-block;
+    transform: translateY(-50%);
+    background-color: #FF6D00;
+    transition: box-shadow 0.3s ease-out, background-color 0.3s ease-out;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    border: 0;
+    color: white;
+}
+
+#slice2 .button:hover {
+    background-color: #FF9100;
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+}
+
+#slice2 .button + * {
+    margin-top: 0;
+}
+
+#slice2 p {
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 100;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    width: 85%;
+    padding-bottom: 2.75rem;  /* Same as the size of the SIGN UP button: 1.5rem line height, plus 1rem padding top, plus 1rem padding bottom. */
+    margin-bottom: 0;
+}
+
+/*
+ * Third slice.
+ */
+
+#slice3a p {
+    margin-top: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: 1rem;
+    width: 85%;
+    color: #424242;
+}
+
+#slice3a-image1, #slice3a-image2 {
+    width: 255px;
+    height: 200px;
+    margin: 2rem auto;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, .2);
+}
+
+#slice3a-image1 > div, #slice3a-image2 > div {
+    width: 1280px;
+    height: 250px;
+    background-image: url(img/outer-slice3-image@1428w.png);
+    background-size: 975px;
+    background-repeat: no-repeat;
+    position: absolute;
+    right: 0;
+}
+
+#slice3a-image1 > div {
+    background-position: right -60px;
+}
+
+#slice3a-image2 > div {
+    background-position: right -160px;
+}
+
+/*
+ * Fourth slice.
+ */
+
+#slice4 p {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 1px #333;
+    font-size: 2rem;
+    font-weight: 100;
+    width: 85%;
+    padding: 2rem 0;
+    margin: 0 auto;
+}
+
+/*
+ * Fifth slice.
+ */
+
+#slice5 p, #slice5 a {
+    font-size: 0.6rem;
+    color: #BDBDBD;
+}
+
+#slice5 a {
+    float: right;
+}
+
+#slice5 a:hover {
+    color: white;
+}
+
+#slice5 a > span {
+    vertical-align: middle;
+}
+
+/*
+ * Etc
+ */
+
+.osx-window {
+    background: #f0f0f0;
+    background-image: linear-gradient(180deg, #ffffff, #dadee0);
+    border-radius: 5px 5px 0 0;
+    line-height: 0;
+}
+
+.osx-window .circle {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 12px;
+    margin: 5px 3px;
+}
+
+.osx-window .circle.red {
+    background: #fc5959;
+    margin-left: 10px;
+}
+
+.osx-window .circle.yellow {
+    background: #fdbe30;
+}
+
+.osx-window .circle.green {
+    background: #36cf40;
+}
+
+/*
+ * Styles for larger screens.
+ */
+
+@media only screen and (min-width: 50em) {
+    html {
+        font-size: 130%;
+    }
+
+    /*
+     * First slice.
+     */
+
+    #slice1 {
+        overflow: hidden;  /* See "#slice3b" below. */
+    }
+
+    #slice1 .center1280 {
+        position: relative;
+    }
+
+    #sign-in {
+        display: block;
+        position: absolute;
+        right: 40px;
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
+        font-size: 0.85rem;
+        color: #78909C;
+        border: 2px solid #CFD8DC;
+        box-shadow: none;
+        transition: background-color 0.3s ease-out;
+    }
+
+    #sign-in:hover {
+        background-color: #CFD8DC;
+    }
+
+    #sign-in span {
+        vertical-align: middle;
+    }
+
+    /*
+     * Third slice.
+     */
+
+    #slice3a {
+        display: none;
+    }
+
+    #slice3b {
+        display: block;
+        padding-top: 40px;
+        overflow: hidden; /* On Chrome, the screenshot is overflowing 1 Pixel
+                             into the subsequent slice. This fixes it. */
+    }
+
+    #slice3b > div {
+        width: 50%;
+        display: inline-block;
+    }
+
+    #slice3b > div:first-child {
+        vertical-align: top;
+        position: relative;
+    }
+
+    #slice3b-image, #slice3b .osx-window {
+        max-width: calc(.85 * 1280px);
+        box-shadow: 3px 3px 10px rgba(0, 0, 0, .2);
+    }
+
+    #magnifier {
+        overflow: hidden;
+        box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.85), 0 0 7px 7px rgba(0, 0, 0, 0.25);
+    }
+
+    #magnifier, #magnifier + div {
+        position: absolute;
+        width: 350px;
+        height: 350px;
+        top: 0;
+        right: -2rem;
+        border-radius: 100%;
+        transition: top .3s ease;
+    }
+
+    #magnifier + div {
+        box-shadow: inset 0 0 40px 2px rgba(0, 0, 0, 0.25);
+    }
+
+    #magnifier > div {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 2560px;
+        height: 1350px;
+        background-size: 65% 65%;
+        transition: background-position .3s ease;
+    }
+
+    #magnifier.mode1, #magnifier.mode1 + div {
+        top: 0;
+    }
+
+    #magnifier.mode1 > div {
+        background-position: -80% -15%;
+    }
+
+    #magnifier.mode2, #magnifier.mode2 + div {
+        top: 150px;
+    }
+
+    #magnifier.mode2 > div {
+        background-position: -80% -65%;
+    }
+
+    #slice3b p {
+        max-width: calc(.85 * 1280px);
+        box-sizing: border-box;
+        margin: 3.5rem 0;
+        color: #757575;
+        padding: 1.5rem 2rem 1.5rem 5rem;
+        cursor: pointer;
+    }
+
+    #slice3b p.selected {
+        background-color: rgba(0, 0, 0, .05);
+        color: #424242;
+    }
+
+    #slice3b p:hover {
+        color: #424242;
+    }
+
+    /*
+     * Fourth slice.
+     */
+
+    #slice4 p {
+        font-size: 2.5rem;
+    }
+
+    /*
+     * Etc.
+     */
+
+    .osx-window .circle {
+        width: 12px;
+        height: 12px;
+    }
+}
+
+/*
+ * Media queries for the image of third slice, mode B ("slice3b").
+ */
+
+@media only screen and (min-device-pixel-ratio: 1) and (min-width: 800px) and (max-width: 1427px) {
+    #magnifier > div {
+        background-image: url(img/outer-slice3-image@800w.png);
+    }
+}
+
+@media only screen and (min-device-pixel-ratio: 1) and (min-width: 1428px) and (max-width: 2557px) {
+    #magnifier > div {
+        background-image: url(img/outer-slice3-image@1428w.png);
+    }
+}
+
+@media only screen and (min-device-pixel-ratio: 1) and (min-width: 2558px), @media only screen and (min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
+    #magnifier > div {
+        background-image: url(img/outer-slice3-image.png);
+    }
+}

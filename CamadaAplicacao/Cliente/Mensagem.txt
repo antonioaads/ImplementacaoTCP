@@ -1,0 +1,4 @@
+GET Servidor.go HTTP/1.0
+localhost:8081
+Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+Servidor.go
