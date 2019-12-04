@@ -1,13 +1,13 @@
-# ImplementacaoTCP
-Repositório para a implementação do protocolo TCP
+# Implementacao TCP/IP HTTP
+Repositório para a a pilha de protocolos TCP/IP
 Disciplina de Redes / Engenharia de Computação
 
 Prof. Sandro Renato Dias
 
 CEFET-MG / 2019-2
 <br>
-O Documento relata o processo de Implementação da Pilha de Comunicação entre as camada no modelo TCP.
-O trabalho foi dividido em 4 camadas ,são elas: <br>
+O Documento relata o processo de Implementação da Pilha de Comunicação entre as camadas no modelo TCP/IP.
+O trabalho foi divdido em 4 camadas ,são elas: <br>
 <li>Camada de Aplicação : Desenvolvida pelo aluno Marcos Junio, utilizando a Linguagem Go.<br>
 <li>Camada de Transporte : Desenvolvida pelo aluno Gabriel , utilizando a Linguagem Python.<br>
 <li>Camada de Rede : Desenvolvida pelo aluno Rodrigo ,utilizando a linguagem JavaScript.<br>
@@ -41,6 +41,72 @@ E Assim poderá ser verificado pelos Logs no terminal que o Servidor Local está
 De Maneira analoga ao Cliente, no servidor vamos rodar o arquivo Servidor.go<br>
 go build Servidor.go <br>
 go run Servidor.go<br>
+
+# Camada de Transporte
+## Escolhas de projeto
+A camada TCP criada implementa os métodos básicos de transmissão TCP, que incluem segmentação, estabelecimento de conexão e retransmissão além de técnicas de Retransmissão rápida, controle de fluxo. A camada TCP criada não implementa técnicas de temporização, checksum, controle de congestionamento completo, ou uma comunicação Peer-to-peer (Apesar de idealmente simular uma utilizando pares cliente/servidor).
+
+A camada UDP criada apenas segmenta e envia dados, que são recebidos por uma aplicação chamada de udp_server (que apenas escuta e integra os segmentos, esta não realiza qualquer resposta ao cliente)
+
+## Comunicação para envio de pacotes
+O envio de pacotes para camadas abaixo se dá por meio de arquivos de formato txt, colocados em uma pasta específica e configurável (TCP Apenas, é necessário editar variáveis globais no código fonte de udp_cliente.py e udp_server.py para alterar um caminho) para uso pela implementação da camada abaixo. Uma vez excluído, a implementação das camadas TCP e UDP considera que o arquivo foi enviado para camada abaixo.
+
+O conteúdo do arquivo é precedido de um Header, utilizado para indicar a porta de origem e destino do pacote
+
+## Comunicação para recebimento de pacotes
+O recebimento de pacotes ocorre por meio de um arquivo txt. É necessário que o conteúdo do arquivo contenha um Header, e que a porta de destino seja a mesma especificada para a implementação De outra forma, o pacote é descartado.
+
+## Formato do cabeçalho
+
+Os cabeçalhos TCP e UDP são sepadados do payload por meio de duas barras verticais (' || ') antes e depois do cabeçalho. Dentre estas barras, cada campo do cabeçalho é separado por uma única barra vertical (' | ').
+
+Um cabeçalho TCP contém porta de origem, porta de destino, nº de sequência, nº de acknowledgement, tamanho de janela e flags (uma flag ativa tem valor 1, uma flag inativa tem valor 0. As flags implementadas foram ACK (2º bit), SYN (5º bit), e FIN (6º bit))
+
+ex.:
+||12345|80|70|0|5|000010||
+
+Um cabeçalho UDP contém apenas porta de origem, porta de destino e tamanho do segmento.
+
+ex.:
+||12345|80|256||
+
+## Técnicas utilizadas
+### Retransmissão rápida
+Dentro de transp_server.py, a função listener() lida com os pacotes sendo recebidos, e ao encontrar pacotes cujo nº de sequência seja diferente do nº de acknowledgement, ao invés de confirmar, envia o último acknowledgement em sequência realizado  
+
+### Controle de fluxo
+O tamanho da janela é determinado pelo campo w_size do Header TCP (Penúltimo Campo). O receptor receberá até aquele número de segmentos não confirmados
+
+O cliente dentro da função transfer() tem controle dos segmentos que sofrem timeout e dos segmentos que são retornados por transp_server. Desta forma, pode reenviar segmentos caso um segmento enviado sofra timeout, ou um mesmo ACK seja recebido três vezes.
+
+## Execução
+### TCP
+Configure o local desejado para envio/recebimento dos arquivos em config.txt, em ordem:
+<li>Endereço para recebimento de mensagens da camada de aplicação<br>
+<li>Endereço para envio de mensagens para camada de aplicação<br>
+<li>Endereço para envio de mensagens para camada de rede<br>
+<li>Endereço para recebimento de mensagens da camada de rede<br>
+
+Depois basta executar transp_cliente para enviar requisições da camada de aplicação, ou transp_server para receber conexões de outras aplicações.
+
+ex.: 
+
+python3 transp_cliente.py <porta_local> <porta_destino>
+python3 transp_server.py <porta_local>
+
+### UDP
+
+Execute udp_cliente para enviar pacotes udp e udp_server para escutar pacotes udp. Os locais utilizados por estes são definidos por meio de variáveis globais:
+<li>Endereço para recebimento de mensagens da camada de aplicação (udp_cliente.py): appl_req <br>
+<li>Endereço para envio de mensagens para camada de aplicação (udp_servidor.py): appl_req  <br>
+<li>Endereço para envio de mensagens para camada de rede: phys_dump <br>
+<li>Endereço para recebimento de mensagens da camada de rede: phys_loc <br>
+<li>Portas locais e de destino: lcl_port e dst_port
+
+ex.:
+
+python3 udp_cliente.py
+python3 udp_server.py
 
 # Camada de Rede
 O objetivo desta parte do trabalho diz respeito ao roteamento realizado pela camada de rede da pilha de protocolos TCP/IP.
