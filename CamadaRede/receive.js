@@ -14,9 +14,10 @@ const config = loadConfig()
 function receiveNetworkPacket () {
   const packet = readFileSync(args[0]).toString()
 
+  const fdestinationIp = extractFromEthPacket('final_destination_ip', packet)
   const destinationIp = extractFromEthPacket('destination_ip', packet)
   
-  if (config.local.ip === destinationIp) {
+  if (config.local.ip === fdestinationIp) {
     // save packet file and call transport layer
     saveAndPushUp(packet)
   } else {
@@ -47,8 +48,7 @@ function saveAndPushUp (originalPacket) {
     finalPacket = `${finalPacket}${frag}`
   })
 
-  writeFileSync('../pacotes/pdu_transporte.txt', finalPacket)
-  execSync('../camada-transporte/transp_server.py')
+  writeFileSync('../pacotes/pud-volta.txt', finalPacket)
 }
 
 function saveAndResendPacket (originalPacket, nextHop) {
@@ -57,7 +57,7 @@ function saveAndResendPacket (originalPacket, nextHop) {
   let networkHeader = `||${originIp}|${nextHop}|${packetCheckSum}||`
   const finalPacket = `${networkHeader}${originalPacket}`
 
-  writeFileSync('../pacotes/pdu_rede.txt', finalPacket)
+  writeFileSync('../pacotes/pdu_fisica.txt', finalPacket)
   execSync('../camada-fisica/cliente/cliente_fisica.sh')
 }
 

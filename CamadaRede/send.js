@@ -21,7 +21,7 @@ function sendNetworkPacket () {
     let nextHop = config.default
 
     if (isLocal(config.local.ip, config.local.mask, destinationIp)) {
-      nextHop = `${destinationIp}`
+      nextHop = destinationIp
     } else {
       for (const route in config.routes) {
         if (config.routes[route].includes(destinationIp)) {
@@ -41,8 +41,8 @@ function saveAndSendPacket (originalPacket, nextHop) {
   let networkHeader = `||${config.local.ip}|${nextHop}|${packetCheckSum}||`
   const finalPacket = `${networkHeader}${originalPacket}`
 
-  writeFileSync('../pacotes/pdu_rede.txt', finalPacket)
-  execSync('../camada-fisica/cliente/cliente_fisica.sh')
+  writeFileSync('../pacotes/pdu_fisica.txt', finalPacket)
+  // execSync('../camada-fisica/cliente/cliente_fisica.sh')
 }
 
 sendNetworkPacket()
